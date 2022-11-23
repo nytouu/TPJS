@@ -1,0 +1,40 @@
+div
+{
+	display: flex;
+	margin: auto;
+}
+body
+
+{
+	background-color: black;
+}
+
+.header
+{
+	height: 80px;
+	width: 80%;
+	justify-content: center;
+	align-items: center;
+	background-color: #194D33;
+	color: #E7FFF3;
+	text-shadow: 2px 2px 5px #062B19;
+}
+
+.game
+{
+	height: 420px;
+	width: 80%;
+	justify-content: center;
+	align-items: center;
+	background-color: #65917B;
+}
+
+.selector
+{
+	height: 280px;
+	width: 80%;
+	justify-content: center;
+	align-items: center;
+	background-color: #15402A;
+	color: #E7FFF3;
+}
