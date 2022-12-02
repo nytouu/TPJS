@@ -13,16 +13,6 @@
   src: url(assets/fonts/scientifica/scientificaItalic.ttf);
 }
 
-/*div
-{
-	display: flex;
-	margin: auto;
-	color: #E7FFF3;
-	text-shadow: 4px 4px #062B19;
-	font-family: scientifica;
-	font-size: 28px;
-}*/
-
 body
 {
 	display: flex;
@@ -79,6 +69,7 @@ body
 	background-position: center center;
 	background-size : 100%;
 	background-position: 0% 95%;
+	image-rendering: pixelated;
 }
 
 .game#gameleft
@@ -88,8 +79,8 @@ body
 	height: 80%;
 	margin: 10px;
 	text-shadow: 4px 4px #194D33;
-	justify-content: center;
-	align-items: center;
+	justify-content: space-evenly;
+	align-items: flex-end;
 	background-image: none;
 }
 
@@ -100,8 +91,8 @@ body
 	height: 80%;
 	margin: 10px;
 	text-shadow: 4px 4px #194D33;
-	justify-content: center;
-	align-items: center;
+	justify-content: space-evenly;
+	align-items: flex-end;
 	background-image: none;
 }
 
@@ -123,8 +114,6 @@ body
 
 .selectorleft#buttonsleft
 {
-	/* float: left; */
-	/* width: 30%; */
 	margin: 10px;
 	background-color: #093D23;
 	flex-direction: column;
@@ -140,8 +129,6 @@ body
 
 .selectorright#buttonsright
 {
-	/* float: left; */
-	/* width: 30%; */
 	margin: 10px;
 	background-color: #093D23;
 	flex-direction: column;
@@ -150,9 +137,27 @@ body
 
 .button
 {
+	display: flex;
 	width: 40%;
-	height: 20%;
+	height: 10%;
 	padding: 10px;
 	margin: 10px;
 	background-color: #65917B;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.player
+{
+	image-rendering: pixelated;
+	filter: drop-shadow(4px 4px 6px #111111);
+	cursor: pointer;
+}
+.ennemy
+{
+	image-rendering: pixelated;
+	filter: drop-shadow(4px 4px 6px #111111);
+	transform: scaleX(-1);
+	cursor: pointer;
 }
