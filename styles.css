@@ -1,16 +1,16 @@
 @font-face {
   font-family: scientifica;
-  src: url(fonts/scientifica/scientifica.ttf);
+  src: url(assets/fonts/scientifica/scientifica.ttf);
 }
 
 @font-face {
   font-family: scientifica-bold;
-  src: url(fonts/scientifica/scientificaBold.ttf);
+  src: url(assetsfonts/scientifica/scientificaBold.ttf);
 }
 
 @font-face {
   font-family: scientifica-italic;
-  src: url(fonts/scientifica/scientificaItalic.ttf);
+  src: url(assets/fonts/scientifica/scientificaItalic.ttf);
 }
 
 /*div
