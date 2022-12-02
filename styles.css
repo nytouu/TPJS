@@ -68,6 +68,19 @@ body
 	align-items: center;
 }
 
+.game
+{
+	display: flex;
+	width: 80%;
+	height: 420px;
+	/* background-color: #65917B; */
+	background-image: url(assets/background.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size : 100%;
+	background-position: 0% 95%;
+}
+
 .game#gameleft
 {
 	float: left;
@@ -77,6 +90,7 @@ body
 	text-shadow: 4px 4px #194D33;
 	justify-content: center;
 	align-items: center;
+	background-image: none;
 }
 
 .game#gameright
@@ -88,15 +102,7 @@ body
 	text-shadow: 4px 4px #194D33;
 	justify-content: center;
 	align-items: center;
-}
-
-.game
-{
-	display: flex;
-	width: 80%;
-	height: 420px;
-	background-color: #65917B;
-
+	background-image: none;
 }
 
 .selector
