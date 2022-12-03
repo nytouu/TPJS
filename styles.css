@@ -38,7 +38,6 @@ body
 
 .header#textarea
 {
-	float: left;
 	width: 80%;
 	height: 80%;
 	margin: 10px;
@@ -49,7 +48,6 @@ body
 
 .header#stats
 {
-	float: right;
 	width: 20%;
 	height: 80%;
 	margin: 10px;
