@@ -6,44 +6,43 @@ player4 = document.getElementById("player4");
 const players = [];
 players.push(player1, player2, player3, player4);
 
-
 ennemy1 = document.getElementById("ennemy1");
 ennemy2 = document.getElementById("ennemy2");
 ennemy3 = document.getElementById("ennemy3");
 
 const ennemies = [];
-players.push(ennemy1, ennemy2, ennemy3);
-
+ennemies.push(ennemy1, ennemy2, ennemy3);
 
 stats = document.getElementById("stats");
 
 for(let i=0; i < players.length; i++) {
     players[i].hp = 20;
+	switch(i) {
+		case 0:
+			players[0].name = "Magician";
+		case 1:
+			players[1].name = "Sara";
+		case 2:
+			players[2].name = "Bald";
+		case 3:
+			players[3].name = "Possum";
+	}
+	players[i].onmouseover = function() {
+		stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
+	}
 }
+
 for(let i=0; i < ennemies.length; i++) {
     ennemies[i].hp = 20;
-}
-
-
-player1.onmouseover = function() {
-    stats.innerHTML = "Magician<br>" + player1.hp + " HP";
-}
-player2.onmouseover = function() {
-    stats.innerHTML = "Sara<br>" + player2.hp + " HP";
-}
-player3.onmouseover = function() {
-    stats.innerHTML = "Bald<br>" + player3.hp + " HP";
-}
-player4.onmouseover = function() {
-    stats.innerHTML = "Possum<br>" + player4.hp + " HP";
-}
-
-ennemy1.onmouseover = function() {
-    stats.innerHTML = "Goblin<br>" + ennemy1.hp + " HP";
-}
-ennemy2.onmouseover = function() {
-    stats.innerHTML = "Spider<br>" + ennemy2.hp + " HP";
-}
-ennemy3.onmouseover = function() {
-    stats.innerHTML = "Skeleton<br>" + ennemy3.hp + " HP";
+	switch(i) {
+		case 0:
+			ennemies[0].name = "Goblin";
+		case 1:
+			ennemies[1].name = "Spider";
+		case 2:
+			ennemies[2].name = "Skeleton";
+	}
+	ennemies[i].onmouseover = function() {
+		stats.innerHTML = ennemies[i].name + "<br> HP: " + ennemies[i].hp;
+	}
 }
