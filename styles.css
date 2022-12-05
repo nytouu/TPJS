@@ -114,7 +114,7 @@ body
 	margin: 10px;
 	background-color: #093D23;
 	flex-direction: column;
-	width: 50%;
+	width: 40%;
 }
 
 .selectorright
@@ -129,7 +129,22 @@ body
 	margin: 10px;
 	background-color: #093D23;
 	flex-direction: column;
-	width: 50%;
+	width: 40%;
+}
+
+.selectormiddle
+{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.selectormiddle#buttonsmiddle
+{
+	margin: 10px;
+	background-color: #093D23;
+	flex-direction: column;
+	width: 20%;
 }
 
 .button
