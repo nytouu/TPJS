@@ -20,6 +20,9 @@ for(let i=0; i < players.length; i++) {
         stats.style.color = "green"
 		stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
 	}
+	players[i].onmouseout = function() {
+		stats.innerHTML = "";
+	}
 }
 
 for(let i=0; i < ennemies.length; i++) {
@@ -35,5 +38,28 @@ for(let i=0; i < ennemies.length; i++) {
 	ennemies[i].onmouseover = function() {
         stats.style.color = "red"
 		stats.innerHTML = ennemies[i].name + "<br> HP: " + ennemies[i].hp;
+	}
+	ennemies[i].onmouseout = function() {
+		stats.innerHTML = "";
+	}
+}
+
+for(let i=0; i < buttons.length; i++) {
+	if (i < players.length) {
+		buttons[i].onmouseover = function() {
+			stats.style.color = "green"
+			stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
+		}
+		buttons[i].onmouseout = function() {
+			stats.innerHTML = "";
+		}
+	} else {
+		buttons[i].onmouseover = function() {
+			stats.style.color = "red"
+			stats.innerHTML = ennemies[i-players.length].name + "<br> HP: " + players[i-players.length].hp;
+		}
+		buttons[i].onmouseout = function() {
+			stats.innerHTML = "";
+		}
 	}
 }
