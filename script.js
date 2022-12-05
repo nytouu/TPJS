@@ -7,6 +7,26 @@ const buttons = document.getElementsByClassName("button")
 let text = document.getElementById("textarea")
 let stats = document.getElementById("stats");
 
+
+function highlightButtonPlayer(playersbuttons, selected) {
+    // reset les couleurs sur tout les boutons
+    for (let i=0; i < playersbuttons.length; i++) {
+        playersbuttons[i].style.backgroundColor = "#65917B";
+    }
+    if (selected.type == "player") {
+        selected.style.backgroundColor = "#ffffff";
+    }
+}
+function highlightButtonEnnemy(ennemiesbuttons, selected) {
+    // reset les couleurs sur tout les boutons
+    for (let i=0; i < ennemiesbuttons.length; i++) {
+        ennemiesbuttons[i].style.backgroundColor = "#65917B";
+    }
+    if (selected.type == "ennemy") {
+        selected.style.backgroundColor = "#ffffff";
+    }
+}
+
 // initialisation des joueurs
 for(let i=0; i < players.length; i++) {
     // selon leur index on leur donne un nom
@@ -58,8 +78,13 @@ for(let i=0; i < ennemies.length; i++) {
 
 // initialisation des boutons
 for(let i=0; i < buttons.length; i++) {
+    buttons[i].onclick = function() {
+        highlightButton(buttons, buttons[i])
+    }
+
     // on gere les boutons des joueurs en premier
 	if (i < players.length) {
+        buttons[i].type = "player"
 		buttons[i].onmouseover = function() {
 			stats.style.color = "green"
 			stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
@@ -67,8 +92,14 @@ for(let i=0; i < buttons.length; i++) {
 		buttons[i].onmouseout = function() {
 			stats.innerHTML = "";
 		}
+        buttons[i].onclick = function() {
+            // on converti notre "liste" HTMLCollection en Array afin d'utiliser la methode filter
+            let arr = [].slice.call(buttons)
+            highlightButtonPlayer(arr.filter(button => button.type == "player"), buttons[i])
+        }
 	} else {
         // puis ceux des monstres
+        buttons[i].type = "ennemy"
 		buttons[i].onmouseover = function() {
 			stats.style.color = "red"
             // ici l'indice est i-players.length puisque tout les boutons sont dans la meme liste
@@ -77,5 +108,10 @@ for(let i=0; i < buttons.length; i++) {
 		buttons[i].onmouseout = function() {
 			stats.innerHTML = "";
 		}
+        buttons[i].onclick = function() {
+            // on converti notre "liste" HTMLCollection en Array afin d'utiliser la methode filter
+            let arr = [].slice.call(buttons)
+            highlightButtonEnnemy(arr.filter(button => button.type == "ennemy"), buttons[i])
+        }
 	}
 }
