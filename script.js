@@ -8,29 +8,55 @@ let text = document.getElementById("textarea")
 let stats = document.getElementById("stats");
 
 
-function highlightButtonPlayer(playersbuttons, selected) {
+function highlightButtonPlayer(playersbuttons, selected)
+{
     // reset les couleurs sur tout les boutons
-    for (let i=0; i < playersbuttons.length; i++) {
+    for (let i=0; i < playersbuttons.length; i++)
+    {
         playersbuttons[i].style.backgroundColor = "#65917B";
     }
-    if (selected.type == "player") {
-        selected.style.backgroundColor = "#ffffff";
-    }
-}
-function highlightButtonEnnemy(ennemiesbuttons, selected) {
-    // reset les couleurs sur tout les boutons
-    for (let i=0; i < ennemiesbuttons.length; i++) {
-        ennemiesbuttons[i].style.backgroundColor = "#65917B";
-    }
-    if (selected.type == "ennemy") {
+    if (selected.type == "player")
+    {
         selected.style.backgroundColor = "#ffffff";
     }
 }
 
+function highlightButtonEnnemy(ennemiesbuttons, selected)
+{
+    // reset les couleurs sur tout les boutons
+    for (let i=0; i < ennemiesbuttons.length; i++)
+    {
+        ennemiesbuttons[i].style.backgroundColor = "#65917B";
+    }
+    if (selected.type == "ennemy")
+    {
+        selected.style.backgroundColor = "#ffffff";
+    }
+}
+
+function highlightButtonAttack(selected)
+{
+    // reset les couleurs sur tout les boutons
+    if (selected.type == "attack")
+    {
+        selected.style.backgroundColor = "#ffffff";
+    }
+}
+
+function highlightButtonReset(buttons)
+{
+    for (let i=0; i < buttons.length; i++)
+    {
+        buttons[i].backgroundColor = "#65917B"
+    }
+}
+
 // initialisation des joueurs
-for(let i=0; i < players.length; i++) {
+for(let i=0; i < players.length; i++)
+{
     // selon leur index on leur donne un nom
-	switch(i) {
+	switch(i)
+    {
 		case 0:
 			players[0].name = "Magician";
             players[0].hp = 15
@@ -44,19 +70,24 @@ for(let i=0; i < players.length; i++) {
 			players[3].name = "Possum";
             players[3].hp = 20
 	}
+
     // on defini les fonctions callback pour l'affichage des hp
-	players[i].onmouseover = function() {
+	players[i].onmouseover = function()
+    {
         stats.style.color = "green"
 		stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
 	}
-	players[i].onmouseout = function() {
+	players[i].onmouseout = function()
+    {
 		stats.innerHTML = "";
 	}
 }
 
 // meme chose pour les ennemis
-for(let i=0; i < ennemies.length; i++) {
-	switch(i) {
+for(let i=0; i < ennemies.length; i++)
+{
+	switch(i)
+    {
 		case 0:
 			ennemies[0].name = "Goblin";
             ennemies[0].hp = 30;
@@ -67,50 +98,69 @@ for(let i=0; i < ennemies.length; i++) {
 			ennemies[2].name = "Skeleton";
             ennemies[2].hp = 20;
 	}
-	ennemies[i].onmouseover = function() {
+
+	ennemies[i].onmouseover = function()
+    {
         stats.style.color = "red"
 		stats.innerHTML = ennemies[i].name + "<br> HP: " + ennemies[i].hp;
 	}
-	ennemies[i].onmouseout = function() {
+	ennemies[i].onmouseout = function()
+    {
 		stats.innerHTML = "";
 	}
 }
 
 // initialisation des boutons
-for(let i=0; i < buttons.length; i++) {
-    buttons[i].onclick = function() {
-        highlightButton(buttons, buttons[i])
-    }
-
+for(let i=0; i < buttons.length; i++)
+{
     // on gere les boutons des joueurs en premier
-	if (i < players.length) {
+	if (i < players.length)
+    {
+        // on converti notre "liste" HTMLCollection en Array afin d'utiliser la methode filter
+        let arr = [].slice.call(buttons)
         buttons[i].type = "player"
-		buttons[i].onmouseover = function() {
+
+		buttons[i].onmouseover = function()
+        {
 			stats.style.color = "green"
 			stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
 		}
-		buttons[i].onmouseout = function() {
+		buttons[i].onmouseout = function()
+        {
 			stats.innerHTML = "";
 		}
-        buttons[i].onclick = function() {
-            // on converti notre "liste" HTMLCollection en Array afin d'utiliser la methode filter
-            let arr = [].slice.call(buttons)
+        buttons[i].onclick = function()
+        {
             highlightButtonPlayer(arr.filter(button => button.type == "player"), buttons[i])
         }
-	} else {
-        // puis ceux des monstres
+	}
+    // puis le bouton attaque au milieu
+    else if (i == players.length)
+    {
+        buttons[i].type = "attack"
+
+        buttons[i].onclick = function()
+        {
+            highlightButtonAttack(buttons[i])
+        }
+    }
+    // puis les boutons ennemis
+    else if (i > players.length)
+    {
+        let arr = [].slice.call(buttons)
         buttons[i].type = "ennemy"
-		buttons[i].onmouseover = function() {
+
+		buttons[i].onmouseover = function()
+        {
 			stats.style.color = "red"
-            // ici l'indice est i-players.length puisque tout les boutons sont dans la meme liste
-			stats.innerHTML = ennemies[i-players.length].name + "<br> HP: " + players[i-players.length].hp;
+			stats.innerHTML = ennemies[i-players.length-1].name + "<br> HP: " + players[i-players.length-1].hp;
 		}
-		buttons[i].onmouseout = function() {
+		buttons[i].onmouseout = function()
+        {
 			stats.innerHTML = "";
 		}
-        buttons[i].onclick = function() {
-            // on converti notre "liste" HTMLCollection en Array afin d'utiliser la methode filter
-            let arr = [].slice.call(buttons)
+        buttons[i].onclick = function()
+        {
             highlightButtonEnnemy(arr.filter(button => button.type == "ennemy"), buttons[i])
         }
 	}
