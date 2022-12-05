@@ -1,8 +1,8 @@
-players = document.getElementsByClassName("player")
-ennemies = document.getElementsByClassName("ennemy")
-buttons = document.getElementsByClassName("button")
+let players = document.getElementsByClassName("player")
+let ennemies = document.getElementsByClassName("ennemy")
+let buttons = document.getElementsByClassName("button")
 
-stats = document.getElementById("stats");
+let stats = document.getElementById("stats");
 
 for(let i=0; i < players.length; i++) {
     players[i].hp = 20;
