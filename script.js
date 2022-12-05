@@ -1,9 +1,13 @@
-let players = document.getElementsByClassName("player")
-let ennemies = document.getElementsByClassName("ennemy")
-let buttons = document.getElementsByClassName("button")
+// listes pour les elements html
+const players = document.getElementsByClassName("player")
+const ennemies = document.getElementsByClassName("ennemy")
+const buttons = document.getElementsByClassName("button")
 
+// elements en header pour les messages de jeu et les stats des entitees
+let text = document.getElementById("textarea")
 let stats = document.getElementById("stats");
 
+// initialisation des joueurs
 for(let i=0; i < players.length; i++) {
     players[i].hp = 20;
 	switch(i) {
@@ -16,6 +20,7 @@ for(let i=0; i < players.length; i++) {
 		case 3:
 			players[3].name = "Possum";
 	}
+    // on defini les fonctions callback pour l'affichage des hp
 	players[i].onmouseover = function() {
         stats.style.color = "green"
 		stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
@@ -25,6 +30,7 @@ for(let i=0; i < players.length; i++) {
 	}
 }
 
+// meme chose pour les ennemis
 for(let i=0; i < ennemies.length; i++) {
     ennemies[i].hp = 20;
 	switch(i) {
@@ -44,7 +50,9 @@ for(let i=0; i < ennemies.length; i++) {
 	}
 }
 
+// initialisation des boutons
 for(let i=0; i < buttons.length; i++) {
+    // on gere les boutons des joueurs en premier
 	if (i < players.length) {
 		buttons[i].onmouseover = function() {
 			stats.style.color = "green"
@@ -54,8 +62,10 @@ for(let i=0; i < buttons.length; i++) {
 			stats.innerHTML = "";
 		}
 	} else {
+        // puis ceux des monstres
 		buttons[i].onmouseover = function() {
 			stats.style.color = "red"
+            // ici l'indice est i-players.length puisque tout les boutons sont dans la meme liste
 			stats.innerHTML = ennemies[i-players.length].name + "<br> HP: " + players[i-players.length].hp;
 		}
 		buttons[i].onmouseout = function() {

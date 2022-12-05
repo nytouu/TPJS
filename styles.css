@@ -61,7 +61,6 @@ body
 	display: flex;
 	width: 80%;
 	height: 420px;
-	/* background-color: #65917B; */
 	background-image: url(assets/background.png);
 	background-repeat: no-repeat;
 	background-position: center center;
