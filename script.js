@@ -17,7 +17,7 @@ function highlightButtonPlayer(playersbuttons, selected)
     }
     if (selected.type == "player")
     {
-        selected.style.backgroundColor = "#ffffff";
+        selected.style.backgroundColor = "darkgreen";
     }
 }
 
@@ -30,7 +30,7 @@ function highlightButtonEnnemy(ennemiesbuttons, selected)
     }
     if (selected.type == "ennemy")
     {
-        selected.style.backgroundColor = "#ffffff";
+        selected.style.backgroundColor = "darkred";
     }
 }
 
