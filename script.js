@@ -1,3 +1,6 @@
+//
+// VARIABLES
+//
 // listes pour les elements html
 const players = document.getElementsByClassName("player")
 const ennemies = document.getElementsByClassName("ennemy")
@@ -8,6 +11,10 @@ const actionbuttons = document.getElementsByClassName("buttonaction")
 let text = document.getElementById("textarea")
 let stats = document.getElementById("stats");
 
+
+//
+// FONCTIONS
+//
 
 function highlightButtonPlayer(playersbuttons, selected)
 {
@@ -68,6 +75,10 @@ function highlightButtonReset(buttons)
         buttons[i].backgroundColor = "#65917B"
     }
 }
+
+//
+// CODE
+//
 
 // initialisation des joueurs
 for(let i=0; i < players.length; i++)
