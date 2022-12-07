@@ -2,19 +2,29 @@
 // VARIABLES
 //
 // listes pour les elements html
-const players = document.getElementsByClassName("player")
-const ennemies = document.getElementsByClassName("ennemy")
-const buttons = document.getElementsByClassName("button")
-const actionbuttons = document.getElementsByClassName("buttonaction")
+const players = document.getElementsByClassName("player");
+const ennemies = document.getElementsByClassName("ennemy");
+const buttons = document.getElementsByClassName("button");
+const actionbuttons = document.getElementsByClassName("buttonaction");
 
 // elements en header pour les messages de jeu et les stats des entitees
-let text = document.getElementById("textarea")
+let textarea = document.getElementById("textarea");
 let stats = document.getElementById("stats");
 
 
 //
 // FONCTIONS
 //
+
+function printText(text)
+{
+    textarea.innerHTML = text;
+}
+
+function getRandomInt(max)
+{
+    return Math.floor(Math.random() * max);
+}
 
 function highlightButtonPlayer(playersbuttons, selected)
 {
@@ -54,15 +64,12 @@ function highlightButtonAction(selected)
 	switch (selected.type)
 	{
 		case 'attack':
-			console.log(selected.type)
 			selected.style.backgroundColor = "#ff0000";
 			break;
 		case 'defend':
-			console.log(selected.type)
 			selected.style.backgroundColor = "#0000ff";
 			break;
 		case 'special':
-			console.log(selected.type)
 			selected.style.backgroundColor = "#00ff00";
 			break;
     }
@@ -72,7 +79,34 @@ function highlightButtonReset(buttons)
 {
     for (let i=0; i < buttons.length; i++)
     {
-        buttons[i].backgroundColor = "#65917B"
+        buttons[i].backgroundColor = "#65917B";
+    }
+}
+
+function playerAttack(player,ennemy)
+{
+    if (player.state == "alive" && ennemy.state == "alive")
+    {
+        printText(player.name + " is attacking " + ennemy.name);
+        if (player.mana > 0)
+        {
+            player.mana = player.mana - 10;
+        }
+        else if (player.mana <= 0)
+        {
+            player.mana = player.max_mana;
+        }
+
+        if (ennemy.hp > 0)
+        {
+            ennemy.hp = ennemy.hp - getRandomInt(5)
+        }
+        if (ennemy.hp <= 0)
+        {
+            ennemy.hp = 0
+            printText(ennemy.name + " was defeated by " + player.name)
+            ennemy.state = "dead"
+        }
     }
 }
 
@@ -88,30 +122,38 @@ for(let i=0; i < players.length; i++)
     {
 		case 0:
 			players[0].name = "Magician";
-            players[0].hp = 15
-            players[0].mana = 100
+            players[0].hp = 15;
+            players[0].mana = 100;
+            players[0].max_mana = 100;
+            players[0].state = "alive"
 			break;
 		case 1:
 			players[1].name = "Sara";
-            players[1].hp = 20
-            players[1].mana = 60
+            players[1].hp = 20;
+            players[1].mana = 60;
+            players[1].max_mana = 60;
+            players[1].state = "alive"
 			break;
 		case 2:
 			players[2].name = "Bald";
-            players[2].hp = 30
-            players[2].mana = 30
+            players[2].hp = 30;
+            players[2].mana = 30;
+            players[2].max_mana = 30;
+            players[2].state = "alive"
 			break;
 		case 3:
 			players[3].name = "Possum";
-            players[3].hp = 20
-            players[3].mana = 0
+            players[3].hp = 20;
+            players[3].mana = 0;
+            players[3].max_mana = 0;
+            players[3].state = "alive"
 			break;
 	}
 
     // on defini les fonctions callback pour l'affichage des hp
 	players[i].onmouseover = function()
     {
-        stats.style.color = "green"
+        stats.style.color = "green";
 		stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp + ", Mana: " + players[i].mana;
 	}
 	players[i].onmouseout = function()
@@ -128,20 +170,23 @@ for(let i=0; i < ennemies.length; i++)
 		case 0:
 			ennemies[0].name = "Goblin";
             ennemies[0].hp = 40;
+            ennemies[0].state = "alive";
 			break;
 		case 1:
 			ennemies[1].name = "Spider";
             ennemies[1].hp = 30;
+            ennemies[1].state = "alive";
 			break;
 		case 2:
 			ennemies[2].name = "Skeleton";
             ennemies[2].hp = 30;
+            ennemies[2].state = "alive";
 			break;
 	}
 
 	ennemies[i].onmouseover = function()
     {
-        stats.style.color = "red"
+        stats.style.color = "red";
 		stats.innerHTML = ennemies[i].name + "<br> HP: " + ennemies[i].hp;
 	}
 	ennemies[i].onmouseout = function()
@@ -157,12 +202,12 @@ for(let i=0; i < buttons.length; i++)
 	if (i < players.length)
     {
         // on converti notre "liste" HTMLCollection en Array afin d'utiliser la methode filter
-        let arr = [].slice.call(buttons)
-        buttons[i].type = "player"
+        let arr = [].slice.call(buttons);
+        buttons[i].type = "player";
 
 		buttons[i].onmouseover = function()
         {
-			stats.style.color = "green"
+			stats.style.color = "green";
 			stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
 		}
 		buttons[i].onmouseout = function()
@@ -171,18 +216,18 @@ for(let i=0; i < buttons.length; i++)
 		}
         buttons[i].onclick = function()
         {
-            highlightButtonPlayer(arr.filter(button => button.type == "player"), buttons[i])
+            highlightButtonPlayer(arr.filter(button => button.type == "player"), buttons[i]);
         }
 	}
     // puis les boutons ennemis
     else if (i > players.length - 1)
     {
-        let arr = [].slice.call(buttons)
-        buttons[i].type = "ennemy"
+        let arr = [].slice.call(buttons);
+        buttons[i].type = "ennemy";
 
 		buttons[i].onmouseover = function()
         {
-			stats.style.color = "red"
+			stats.style.color = "red";
 			stats.innerHTML = ennemies[i-players.length].name + "<br> HP: " + players[i-players.length].hp;
 		}
 		buttons[i].onmouseout = function()
@@ -191,7 +236,7 @@ for(let i=0; i < buttons.length; i++)
 		}
         buttons[i].onclick = function()
         {
-            highlightButtonEnnemy(arr.filter(button => button.type == "ennemy"), buttons[i])
+            highlightButtonEnnemy(arr.filter(button => button.type == "ennemy"), buttons[i]);
         }
 	}
 }
@@ -202,17 +247,18 @@ for(let i=0; i < actionbuttons.length; i++)
 	switch (i)
 	{
 		case 0:
-			actionbuttons[0].type = "attack"
+			actionbuttons[0].type = "attack";
+            actionbuttons[0].onclick = function()
+            {
+                highlightButtonAction(actionbuttons[i]);
+                playerAttack(players[1],ennemies[1])
+            }
 			break;
 		case 1:
-			actionbuttons[1].type = "defend"
+			actionbuttons[1].type = "defend";
 			break;
 		case 2:
-			actionbuttons[2].type = "special"
+			actionbuttons[2].type = "special";
 			break;
-	}
-	actionbuttons[i].onclick = function()
-	{
-		highlightButtonAction(actionbuttons[i])
 	}
 }
