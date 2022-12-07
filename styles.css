@@ -160,6 +160,19 @@ body
 	cursor: pointer;
 }
 
+.buttonaction
+{
+	display: flex;
+	width: 40%;
+	height: 10%;
+	padding: 10px;
+	margin: 10px;
+	background-color: #65917B;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
 .player
 {
 	image-rendering: pixelated;

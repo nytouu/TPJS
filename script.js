@@ -134,18 +134,8 @@ for(let i=0; i < buttons.length; i++)
             highlightButtonPlayer(arr.filter(button => button.type == "player"), buttons[i])
         }
 	}
-    // puis le bouton attaque au milieu
-    else if (i == players.length)
-    {
-        buttons[i].type = "attack"
-
-        buttons[i].onclick = function()
-        {
-            highlightButtonAttack(buttons[i])
-        }
-    }
     // puis les boutons ennemis
-    else if (i > players.length)
+    else if (i > players.length - 1)
     {
         let arr = [].slice.call(buttons)
         buttons[i].type = "ennemy"
@@ -153,7 +143,7 @@ for(let i=0; i < buttons.length; i++)
 		buttons[i].onmouseover = function()
         {
 			stats.style.color = "red"
-			stats.innerHTML = ennemies[i-players.length-1].name + "<br> HP: " + players[i-players.length-1].hp;
+			stats.innerHTML = ennemies[i-players.length].name + "<br> HP: " + players[i-players.length].hp;
 		}
 		buttons[i].onmouseout = function()
         {
