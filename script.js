@@ -93,7 +93,7 @@ for(let i=0; i < players.length; i++)
 		case 3:
 			players[3].name = "Possum";
             players[3].hp = 20
-            players[3].hp = 0
+            players[3].mana = 0
 			break;
 	}
 
@@ -101,7 +101,7 @@ for(let i=0; i < players.length; i++)
 	players[i].onmouseover = function()
     {
         stats.style.color = "green"
-		stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
+		stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp + ", Mana: " + players[i].mana;
 	}
 	players[i].onmouseout = function()
     {
