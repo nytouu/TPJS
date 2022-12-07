@@ -60,15 +60,19 @@ for(let i=0; i < players.length; i++)
 		case 0:
 			players[0].name = "Magician";
             players[0].hp = 15
+            players[0].mana = 100
 		case 1:
 			players[1].name = "Sara";
             players[1].hp = 20
+            players[1].mana = 60
 		case 2:
 			players[2].name = "Bald";
             players[2].hp = 30
+            players[2].mana = 30
 		case 3:
 			players[3].name = "Possum";
             players[3].hp = 20
+            players[3].hp = 0
 	}
 
     // on defini les fonctions callback pour l'affichage des hp
