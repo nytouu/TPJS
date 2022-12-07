@@ -2,6 +2,7 @@
 const players = document.getElementsByClassName("player")
 const ennemies = document.getElementsByClassName("ennemy")
 const buttons = document.getElementsByClassName("button")
+const actionbuttons = document.getElementsByClassName("buttonaction")
 
 // elements en header pour les messages de jeu et les stats des entitees
 let text = document.getElementById("textarea")
@@ -34,12 +35,29 @@ function highlightButtonEnnemy(ennemiesbuttons, selected)
     }
 }
 
-function highlightButtonAttack(selected)
+function highlightButtonAction(selected)
 {
     // reset les couleurs sur tout les boutons
-    if (selected.type == "attack")
+    for (let i=0; i < actionbuttons.length; i++)
     {
-        selected.style.backgroundColor = "#ffffff";
+        actionbuttons[i].style.backgroundColor = "#65917B";
+    }
+
+	// on colore le bouton selon son type
+	switch (selected.type)
+	{
+		case 'attack':
+			console.log(selected.type)
+			selected.style.backgroundColor = "#ff0000";
+			break;
+		case 'defend':
+			console.log(selected.type)
+			selected.style.backgroundColor = "#0000ff";
+			break;
+		case 'special':
+			console.log(selected.type)
+			selected.style.backgroundColor = "#00ff00";
+			break;
     }
 }
 
@@ -61,18 +79,22 @@ for(let i=0; i < players.length; i++)
 			players[0].name = "Magician";
             players[0].hp = 15
             players[0].mana = 100
+			break;
 		case 1:
 			players[1].name = "Sara";
             players[1].hp = 20
             players[1].mana = 60
+			break;
 		case 2:
 			players[2].name = "Bald";
             players[2].hp = 30
             players[2].mana = 30
+			break;
 		case 3:
 			players[3].name = "Possum";
             players[3].hp = 20
             players[3].hp = 0
+			break;
 	}
 
     // on defini les fonctions callback pour l'affichage des hp
@@ -95,12 +117,15 @@ for(let i=0; i < ennemies.length; i++)
 		case 0:
 			ennemies[0].name = "Goblin";
             ennemies[0].hp = 30;
+			break;
 		case 1:
 			ennemies[1].name = "Spider";
             ennemies[1].hp = 20;
+			break;
 		case 2:
 			ennemies[2].name = "Skeleton";
             ennemies[2].hp = 20;
+			break;
 	}
 
 	ennemies[i].onmouseover = function()
@@ -114,7 +139,7 @@ for(let i=0; i < ennemies.length; i++)
 	}
 }
 
-// initialisation des boutons
+// initialisation des boutons des entitees
 for(let i=0; i < buttons.length; i++)
 {
     // on gere les boutons des joueurs en premier
@@ -157,5 +182,26 @@ for(let i=0; i < buttons.length; i++)
         {
             highlightButtonEnnemy(arr.filter(button => button.type == "ennemy"), buttons[i])
         }
+	}
+}
+
+// boutons actions
+for(let i=0; i < actionbuttons.length; i++)
+{
+	switch (i)
+	{
+		case 0:
+			actionbuttons[0].type = "attack"
+			break;
+		case 1:
+			actionbuttons[1].type = "defend"
+			break;
+		case 2:
+			actionbuttons[2].type = "special"
+			break;
+	}
+	actionbuttons[i].onclick = function()
+	{
+		highlightButtonAction(actionbuttons[i])
 	}
 }
