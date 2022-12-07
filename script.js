@@ -116,15 +116,15 @@ for(let i=0; i < ennemies.length; i++)
     {
 		case 0:
 			ennemies[0].name = "Goblin";
-            ennemies[0].hp = 30;
+            ennemies[0].hp = 40;
 			break;
 		case 1:
 			ennemies[1].name = "Spider";
-            ennemies[1].hp = 20;
+            ennemies[1].hp = 30;
 			break;
 		case 2:
 			ennemies[2].name = "Skeleton";
-            ennemies[2].hp = 20;
+            ennemies[2].hp = 30;
 			break;
 	}
 
