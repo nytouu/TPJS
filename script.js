@@ -372,7 +372,7 @@ for(let i=0; i < buttons.length; i++)
 		buttons[i].onmouseover = function()
         {
 			stats.style.color = "green";
-			stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp;
+            stats.innerHTML = players[i].name + "<br> HP: " + players[i].hp + ", Mana: " + players[i].mana;
 		}
 		buttons[i].onmouseout = function()
         {
