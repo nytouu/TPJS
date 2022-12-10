@@ -16,16 +16,19 @@ let stats = document.getElementById("stats");
 // FONCTIONS
 //
 
+// affiche du text dans la zone header
 function printText(text)
 {
     textarea.innerHTML = text;
 }
 
+// genere un nombre aleatoire entre 0 et l'arg donnee exclu
 function getRandomInt(max)
 {
     return Math.floor(Math.random() * max);
 }
 
+// clear les couleurs des boutons des personnages et selectionne le personnage
 function clickButtonPlayer(playersbuttons, selectedButton, selectedPlayer)
 {
     // reset les couleurs sur tout les boutons
@@ -34,6 +37,7 @@ function clickButtonPlayer(playersbuttons, selectedButton, selectedPlayer)
         playersbuttons[i].style.backgroundColor = "#65917B";
         playersbuttons[i].selected = 0;
     }
+    // on set la couleur et le statut du perso choisi
     if (selectedButton.type == "player")
     {
         selectedButton.style.backgroundColor = "darkgreen";
@@ -41,6 +45,7 @@ function clickButtonPlayer(playersbuttons, selectedButton, selectedPlayer)
     }
 }
 
+// meme chose pour les ennemis
 function clickButtonEnnemy(ennemiesbuttons, selectedButton, selectedEnnemy)
 {
     // reset les couleurs sur tout les boutons
@@ -56,6 +61,7 @@ function clickButtonEnnemy(ennemiesbuttons, selectedButton, selectedEnnemy)
     }
 }
 
+// meme meme chose pour les boutons d'actions
 function clickButtonAction(selected)
 {
     // reset les couleurs sur tout les boutons
@@ -83,6 +89,7 @@ function clickButtonAction(selected)
     }
 }
 
+// reset les couleurs sur tout les boutons
 function highlightButtonResetAll(buttons)
 {
     for (let i=0; i < buttons.length; i++)
@@ -95,6 +102,7 @@ function highlightButtonResetAll(buttons)
     }
 }
 
+// reset la selection des boutons
 function resetSelection(players,ennemies,buttons)
 {
     for (let i=0; i < players.length; i++)
@@ -111,16 +119,13 @@ function resetSelection(players,ennemies,buttons)
     }
 }
 
+// gere l'attaque d'un personnage sur un ennemi choisi
 function playerAttack(player,ennemy)
 {
-    console.log(player.state)
-    console.log(ennemy.state)
     if (player.state == "alive" && ennemy.state == "alive")
     {
-        console.log("both alive")
         if (player.mana > 0)
         {
-            console.log("has mana")
             printText(player.name + " is attacking " + ennemy.name);
             player.mana = player.mana - 10;
 
@@ -144,6 +149,7 @@ function playerAttack(player,ennemy)
     }
 }
 
+// gere l'attaque speciale : coute plus de mana mais n'est pas random
 function playerSpecial(player,ennemy)
 {
     if (player.state == "alive" && ennemy.state == "alive")
@@ -173,11 +179,13 @@ function playerSpecial(player,ennemy)
     }
 }
 
+// gere la riposte d'un ennemi
 function ennemyAttack(ennemy,player)
 {
     if (ennemy.state == "alive" && player.state == "alive")
     {
         printText(ennemy.name + " is attacking " + player.name);
+        // lorsque le joueur a choisi de defendre, il a une chance de rater sa defense
         if (player.state == "defending")
         {
             let luck = getRandomInt(10)
@@ -203,26 +211,27 @@ function ennemyAttack(ennemy,player)
     }
 }
 
+// gere la defense du personnage
 function playerDefend(player)
 {
     player.state = "defending"
     player.selected = 1
 }
 
+// lorsqu'on a choisi son perso, son ennemi et son type d'action
+// on declenche l'action et on reset les perso/ennemis/boutons selectionnes
 function playAction(players,ennemies,actions)
 {
     let selectedPlayer = 0;
     let selectedEnnemy = 0;
     let selectedAction = 0;
 
-    console.log("button action")
-
+    // on verifie ce qui est selectionne
     for(let i=0; i < players.length; i++)
     {
         if (players[i].selected == 1)
         {
             selectedPlayer = players[i];
-            console.log("selected player : " + selectedPlayer.name)
         }
     }
         for(let i=0; i < ennemies.length; i++)
@@ -230,7 +239,6 @@ function playAction(players,ennemies,actions)
         if (ennemies[i].selected == 1)
         {
             selectedEnnemy = ennemies[i];
-            console.log("selected ennemy : " + selectedEnnemy.name)
         }
     }
     for(let i=0; i < actions.length; i++)
@@ -238,25 +246,21 @@ function playAction(players,ennemies,actions)
         if (actions[i].selected == 1)
         {
             selectedAction = actions[i];
-            console.log("selected action : " + selectedAction.type)
         }
     }
-    console.log(selectedPlayer + selectedEnnemy + selectedAction)
+    // puis si les selections sont valides on effectue l'action voulue
     if (selectedPlayer != 0 && selectedEnnemy != 0 && selectedAction != 0)
     {
         switch (selectedAction.type)
         {
             case "attack":
                 playerAttack(selectedPlayer,selectedEnnemy)
-                console.log("attack triggered")
                 break;
             case "defend":
                 playerDefend(selectedPlayer)
-                console.log("defense triggered")
                 break;
             case "special":
                 playerSpecial(selectedPlayer)
-                console.log("special triggered")
                 break;
         }
     }
@@ -304,6 +308,7 @@ for(let i=0; i < players.length; i++)
             players[3].state = "alive"
             players[3].selected = 0
 			break;
+            // pas tres opti mais bon
 	}
 
     // on defini les fonctions callback pour l'affichage des hp
@@ -375,6 +380,7 @@ for(let i=0; i < buttons.length; i++)
 		}
         buttons[i].onclick = function()
         {
+            // la methode filter renvoie tout les elements ayant l'attribut "player" dans la liste donnee
             clickButtonPlayer(arr.filter(button => button.type == "player"), buttons[i],players[i]);
         }
 	}
