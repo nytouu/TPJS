@@ -87,27 +87,64 @@ function playerAttack(player,ennemy)
 {
     if (player.state == "alive" && ennemy.state == "alive")
     {
-        printText(player.name + " is attacking " + ennemy.name);
         if (player.mana > 0)
         {
+            printText(player.name + " is attacking " + ennemy.name);
             player.mana = player.mana - 10;
+
+            if (ennemy.hp > 0)
+            {
+                ennemy.hp = ennemy.hp - getRandomInt(5)
+            }
+            if (ennemy.hp <= 0)
+            {
+                ennemy.hp = 0
+                printText(ennemy.name + " was defeated by " + player.name)
+                ennemy.state = "dead"
+            }
         }
         else if (player.mana <= 0)
         {
+            printText(player.name + " couldn't attack, they didn't have enough mana !")
             player.mana = player.max_mana;
         }
 
-        if (ennemy.hp > 0)
+    }
+}
+
+function ennemyAttack(ennemy,player)
+{
+    if (ennemy.state == "alive" && player.state == "alive")
+    {
+        printText(ennemy.name + " is attacking " + player.name);
+        if (player.state == "defending")
         {
-            ennemy.hp = ennemy.hp - getRandomInt(5)
+            let luck = getRandomInt(10)
+            if (luck == 0)
+            {
+                printText(player.name + " failed to block " + ennemy.name + "'s attack !")
+            }
+            else
+            {
+                printText(player.name + " blocked " + ennemy.name + "'s attack !")
+            }
         }
-        if (ennemy.hp <= 0)
+        if (player.hp > 0)
         {
-            ennemy.hp = 0
-            printText(ennemy.name + " was defeated by " + player.name)
-            ennemy.state = "dead"
+            player.hp = player.hp - getRandomInt(10)
+            if (player.hp <= 0)
+            {
+                player.hp = 0
+                printText(player.name + " was defeated by " + ennemy.name)
+                player.state = "dead"
+            }
         }
     }
+}
+
+function playerDefend(player)
+{
+    player.state = "defending"
 }
 
 //
